@@ -1,9 +1,6 @@
 package ru.job4j.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
@@ -13,6 +10,16 @@ public class Person {
     private int id;
     private String login;
     private String password;
+    @Column(name = "empl_id")
+    private int emplId;
+
+    public int getEmplId() {
+        return emplId;
+    }
+
+    public void setEmplId(int emplId) {
+        this.emplId = emplId;
+    }
 
     public int getId() {
         return id;
@@ -47,12 +54,12 @@ public class Person {
             return false;
         }
         Person person = (Person) o;
-        return id == person.id && Objects.equals(login, person.login)
+        return id == person.id && emplId == person.emplId && Objects.equals(login, person.login)
                 && Objects.equals(password, person.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password);
+        return Objects.hash(id, login, password, emplId);
     }
 }
